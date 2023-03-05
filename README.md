@@ -93,7 +93,7 @@ cp template.sh my-cool-demo.sh
 terminalizer record demo
 
 # Start scripted demo:
-./cli-demo --some-demo
+./cli-demo --all -i
 # OR
 ./my-cool-demo.sh
 

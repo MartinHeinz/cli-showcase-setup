@@ -5,9 +5,12 @@ import (
 	"github.com/urfave/cli/v2"
 )
 
-// TODO Test
 func main() {
 	d := demo.New()
+
+	d.Name = "A demo of demo"
+	d.Usage = "Examples of how to use this"
+	d.HideVersion = true
 
 	d.Setup(setup)
 	d.Cleanup(cleanup)
@@ -30,7 +33,7 @@ func simple() *demo.Run {
 	), nil)
 
 	r.Step(nil, demo.S(
-		"ps aux",
+		"ps aux | head",
 	))
 
 	r.Step(nil, demo.S(
@@ -76,7 +79,7 @@ func errorProne() *demo.Run {
 	))
 
 	r.Step(nil, demo.S(
-		"wget '-O some-file.txt https://raw.githubusercontent.com/octocat/Hello-World/master/README'",
+		"wget -q --show-progress -O some-file.txt https://raw.githubusercontent.com/octocat/Hello-World/master/README",
 	))
 
 	return r
@@ -92,13 +95,16 @@ func longTyping() *demo.Run {
 	), demo.S(
 		"openssl req -x509 -newkey rsa:4096 -sha256 -days 3650 -nodes ",
 		"-keyout example.key -out example.crt -subj \"/CN=example.com\"",
-		"-addext \"subjectAltName=DNS:example.com,DNS:www.example.net,IP:10.0.0.1\"",
+		"-addext \"subjectAltName=DNS:example.com,DNS:www.example.net,IP:10.0.0.1\" 2>/dev/null",
+	))
+
+	r.Step(nil, demo.S(
+		"ls -l | grep example",
 	))
 
 	return r
 }
 
-// setup will run before every demo
 func setup(ctx *cli.Context) error {
 	// Ensure can be used for easy sequential command execution
 	return demo.Ensure(
@@ -106,7 +112,10 @@ func setup(ctx *cli.Context) error {
 	)
 }
 
-// setup will run after every demo
 func cleanup(ctx *cli.Context) error {
-	return demo.Ensure("rm some-file")
+	return demo.Ensure(
+		"rm some-file some-file.txt || true",
+		"docker rmi some-app || true",
+		"rm example.crt example.key || true",
+	)
 }

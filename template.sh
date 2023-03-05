@@ -21,14 +21,30 @@ function comment() {
 
 clear
 
-#p '# Just a comment'
-comment '# Just a comment'
-pe echo 'Hello!'
+comment "# Simple commands:"
+pe 'ps aux | head'
+pe 'ls -l'
 
-# print and execute immediately: ls -l
-pei "ls -l"
+comment "# Print and execute immediately"
+pei 'cat some-file'
+echo
 
-p '# Enter interactive mode...'
-cmd
+comment "# Long running:"
+pe 'docker build -t some-app .'
+
+comment "# Error prone (dependant on external factors like network):"
+
+pe 'curl --silent -X GET https://httpstat.us/418 -H "Accept: application/json" | jq .'
+
+pe 'curl -i -X POST "https://httpbin.org/status/204" --data "{'some':'data'}"'
+
+pe 'wget -q --show-progress -O some-file.txt https://raw.githubusercontent.com/octocat/Hello-World/master/README'
+
+comment "# Hard to type:"
+
+pe 'openssl req -x509 -newkey rsa:4096 -sha256 -days 3650 -nodes -keyout example.key -out example.crt -subj "/CN=example.com" -addext "subjectAltName=DNS:example.com,DNS:www.example.net,IP:10.0.0.1" 2>/dev/null'
+
+comment "#  Enter interactive mode..."
+cmd  # Run 'ls -l | grep example' to show result of 'openssl ...'
 
 pe "clear"
