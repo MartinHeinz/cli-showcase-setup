@@ -2,13 +2,7 @@
 
 # https://github.com/paxtonhare/demo-magic/blob/master/samples/demo-template.sh
 
-########################
-# include the magic
-########################
-
-
 source demo-magic.sh
-# . demo-magic.sh  # for Mac
 
 DEMO_PROMPT="${GREEN}➜ ${CYAN}\W ${COLOR_RESET}"
 # speed at which to simulate typing. bigger num = faster
