@@ -2,6 +2,8 @@
 
 Templates and config for running scripted and/or pre-recorded CLI demos.
 
+<img src="./samples/sample-demo-magic-small-compressed.gif" width=75% height=75%>
+
 -----
 
 If you find this useful, you can support me on Ko-Fi (Donations are always appreciated, but never required):
