@@ -1,13 +1,23 @@
-## Configuration and Template for CLI-based Demos/Showcases
+# Template for CLI-based Demos/Showcases
 
-### Scripted Demo
+Templates and config for running scripted and/or pre-recorded CLI demos.
+
+-----
+
+If you find this useful, you can support me on Ko-Fi (Donations are always appreciated, but never required):
+
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/K3K6F4XN6)
+
+## Scripted Demo
+
+Repository provides template for 2 scripting tools, below is setup needed for each of them.
 
 Setup (`demo-magic`):
 
 ```shell
+# Install "Pipe Viewer" for simulated typing
 # MacOS:
 brew install pv
-
 # Ubuntu:
 apt-get install pv
 
@@ -15,7 +25,7 @@ git clone https://github.com/paxtonhare/demo-magic.git
 cp demo-magic/demo-magic.sh demo-magic.sh
 ```
 
-To create new demo:
+To create and run a new demo:
 
 ```shell
 cp template.sh my-cool-demo.sh
@@ -35,10 +45,10 @@ go get github.com/saschagrunert/demo@latest
 # Edit 'main.go'
 
 go build
-./cli-demo --demo-0  # or change 'demo-0' to actual name
+./cli-demo --all  # or change 'all' to name of specific demo run
 ```
 
-### Record Demo
+## Recording Demo
 
 ```shell
 # You might need 'sudo'
@@ -52,17 +62,17 @@ terminalizer init
 # The global config directory is created at
 # /home/martin/.terminalizer
 
-# Adjust config.yaml... (change 'title' field)
+# Adjust config.yaml... (e.g., change 'title' field)
 
-# Make it the default:
-cp config.yaml /home/martin/.terminalizer/config.yaml
+# Create copy of default config in current directory
+terminalizer config
 
 # Start recording:
-terminalizer record demo
+terminalizer record demo --config config.yaml
 
 # ... run some commands
 
-# CTRL+D
+# CTRL+D to stop recording...
 
 # Successfully Recorded
 # The recording data is saved into the file:
@@ -72,18 +82,16 @@ terminalizer play demo  # To check
 terminalizer render demo  # To render
 ```
 
-### Workflow
+## Workflow
+
+Example usage/streamlined workflow:
 
 ```shell
 # Create demo:
 
-# -----
 # ... Edit 'main.go'
-
 go build
-
 # OR
-
 cp template.sh my-cool-demo.sh
 # Edit 'my-cool-demo.sh'
 
