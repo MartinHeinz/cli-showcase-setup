@@ -2,6 +2,12 @@
 
 Templates and config for running scripted and/or pre-recorded CLI demos.
 
+You can find more information about this repository and how to use it in following blog post:
+
+- [Make Your CLI Demos a Breeze with Zero Stress and Zero Mistakes](https://martinheinz.dev/blog/94)
+
+---
+
 <img src="./samples/sample-demo-magic-small-compressed.gif" width=75% height=75%>
 
 -----
